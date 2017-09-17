@@ -1,0 +1,12 @@
+﻿
+SpyroTAS is written in delphi and compiled with Delphi 7, but compatible with Lazarus / Free Pascal.
+Source code is licensed under WTFPL (free, public domain).
+
+You can redistribute and modify it without ANY restrictions.
+You also can change "SpyroTAS" title, license, and authorship attribution – no need to mention me anywhere; you may use any piece of code here without referring the source.
+
+However, the above in NOT applied to anything in \pngzlib\ subfolder of plugin source.
+That code is licensed under something else, and I don't have any rights for it.
+But I slightly modified it, and will ship with SpyroTAS anyway; I believe it's a fair use of that.
+
+2017, Kly_Men_COmpany (aleksusklim@gmail.com). No rights reserved.

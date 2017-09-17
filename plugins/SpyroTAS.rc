@@ -1,0 +1,27 @@
+
+#define SpyroTAS_MAJOR 2
+#define SpyroTAS_MINOR 5
+
+
+#define VOS_NT_WINDOWS32	(0x40004L)
+#define VFT_DLL	(0x2L)
+#define STR2(s) #s
+#define STR(s) STR2(s)
+#define SpyroTAS_VERSION STR(SpyroTAS_MAJOR) "." STR(SpyroTAS_MINOR)
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION SpyroTAS_MAJOR,SpyroTAS_MINOR,0,0
+FILEOS VOS_NT_WINDOWS32
+FILETYPE VFT_DLL
+{BLOCK "StringFileInfo"
+{BLOCK "040904E4"{
+VALUE "FileDescription", "SpyroTAS v" SpyroTAS_VERSION "!\0"
+VALUE "CompanyName", "Kly_Men_COmpany\0"
+VALUE "LegalCopyright", "Licensed under WTFPL\0"
+VALUE "OriginalFilename", "SpyroTAS.dll\0"
+VALUE "FileVersion", SpyroTAS_VERSION "\0"
+VALUE "Comments", "It may be possible to extract the source code (if present), try unpack this file with 7zip...\0"
+}}
+BLOCK "VarFileInfo"
+{VALUE "Translation", 0x409, 1251}}
+

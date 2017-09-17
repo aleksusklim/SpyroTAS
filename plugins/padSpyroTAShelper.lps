@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="9"/>
+    <BuildModes Active="Default"/>
+    <Units Count="3">
+      <Unit0>
+        <Filename Value="padSpyroTAShelper.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <CursorPos X="34" Y="3"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="padSpyroTAShelper.dpr"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="35"/>
+        <CursorPos X="16" Y="57"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="D:\LAZ\fpc\3.0.0\source\rtl\win\wininc\struct.inc"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="8346"/>
+        <CursorPos X="27" Y="8351"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit2>
+    </Units>
+    <JumpHistory Count="6" HistoryIndex="5">
+      <Position1>
+        <Filename Value="padSpyroTAShelper.lpr"/>
+        <Caret Line="3" Column="34"/>
+      </Position1>
+      <Position2>
+        <Filename Value="padSpyroTAShelper.dpr"/>
+      </Position2>
+      <Position3>
+        <Filename Value="padSpyroTAShelper.dpr"/>
+        <Caret Line="26" Column="29" TopLine="13"/>
+      </Position3>
+      <Position4>
+        <Filename Value="D:\LAZ\fpc\3.0.0\source\rtl\win\wininc\struct.inc"/>
+        <Caret Line="8051" Column="40" TopLine="8038"/>
+      </Position4>
+      <Position5>
+        <Filename Value="padSpyroTAShelper.dpr"/>
+        <Caret Line="26" Column="29" TopLine="13"/>
+      </Position5>
+      <Position6>
+        <Filename Value="padSpyroTAShelper.dpr"/>
+        <Caret Line="39" Column="34" TopLine="21"/>
+      </Position6>
+    </JumpHistory>
+  </ProjectSession>
+</CONFIG>

@@ -1,0 +1,361 @@
+object Fext: TFext
+  Left = 618
+  Top = 23
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsDialog
+  Caption = 'Extended:'
+  ClientHeight = 175
+  ClientWidth = 284
+  Color = clBtnFace
+  Font.Charset = RUSSIAN_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = 'Arial'
+  Font.Style = []
+  OldCreateOrder = False
+  ShowHint = True
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 16
+  object lst_arch: TListBox
+    Left = 64
+    Top = 3
+    Width = 117
+    Height = 101
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Arial'
+    Font.Style = []
+    ItemHeight = 14
+    ParentFont = False
+    TabOrder = 5
+    OnClick = lst_archClick
+    OnContextPopup = lst_archContextPopup
+    OnDblClick = lst_archDblClick
+  end
+  object b_store: TButton
+    Left = 4
+    Top = 29
+    Width = 58
+    Height = 23
+    Caption = 'Store'
+    TabOrder = 1
+    OnClick = b_storeClick
+  end
+  object b_remove: TButton
+    Left = 4
+    Top = 55
+    Width = 58
+    Height = 23
+    Caption = 'Remove'
+    TabOrder = 2
+    OnClick = b_removeClick
+  end
+  object b_unpack: TButton
+    Left = 4
+    Top = 3
+    Width = 58
+    Height = 23
+    Caption = 'Unpack'
+    TabOrder = 0
+    OnClick = b_unpackClick
+  end
+  object b_export: TButton
+    Left = 4
+    Top = 81
+    Width = 58
+    Height = 23
+    Caption = 'Export...'
+    TabOrder = 3
+    OnClick = b_exportClick
+    OnContextPopup = b_exportContextPopup
+  end
+  object pnl_keys: TPanel
+    Left = 4
+    Top = 107
+    Width = 177
+    Height = 66
+    BevelInner = bvRaised
+    BevelOuter = bvNone
+    BorderStyle = bsSingle
+    Ctl3D = True
+    ParentCtl3D = False
+    TabOrder = 4
+    object l_keys: TLabel
+      Left = 65
+      Top = 4
+      Width = 38
+      Height = 16
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'l_keys'
+    end
+    object c_pad_Left: TCheckBox
+      Left = 24
+      Top = 23
+      Width = 14
+      Height = 17
+      Hint = 'Left'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 0
+      OnClick = c_padClick
+    end
+    object c_pad_Right: TCheckBox
+      Left = 56
+      Top = 23
+      Width = 14
+      Height = 17
+      Hint = 'Right'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 3
+      OnClick = c_padClick
+    end
+    object c_pad_Up: TCheckBox
+      Left = 40
+      Top = 7
+      Width = 13
+      Height = 17
+      Hint = 'Up'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+      OnClick = c_padClick
+    end
+    object c_pad_Down: TCheckBox
+      Left = 40
+      Top = 39
+      Width = 14
+      Height = 17
+      Hint = 'Down'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 2
+      OnClick = c_padClick
+    end
+    object c_pad_L3: TCheckBox
+      Left = 4
+      Top = 43
+      Width = 14
+      Height = 17
+      Hint = 'L3'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 4
+      OnClick = c_padClick
+    end
+    object c_pad_Select: TCheckBox
+      Left = 68
+      Top = 43
+      Width = 14
+      Height = 17
+      Hint = 'Select'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 7
+      OnClick = c_padClick
+    end
+    object c_pad_Start: TCheckBox
+      Left = 88
+      Top = 43
+      Width = 14
+      Height = 17
+      Hint = 'Start'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 8
+      OnClick = c_padClick
+    end
+    object c_pad_R3: TCheckBox
+      Left = 152
+      Top = 43
+      Width = 14
+      Height = 17
+      Hint = 'R3'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 11
+      OnClick = c_padClick
+    end
+    object c_pad_Cross: TCheckBox
+      Left = 116
+      Top = 39
+      Width = 14
+      Height = 17
+      Hint = 'Cross'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 14
+      OnClick = c_padClick
+    end
+    object c_pad_Square: TCheckBox
+      Left = 101
+      Top = 23
+      Width = 17
+      Height = 17
+      Hint = 'Square'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 12
+      OnClick = c_padClick
+    end
+    object c_pad_Circle: TCheckBox
+      Left = 132
+      Top = 23
+      Width = 13
+      Height = 17
+      Hint = 'Circle'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 15
+      OnClick = c_padClick
+    end
+    object c_pad_Triangle: TCheckBox
+      Left = 116
+      Top = 7
+      Width = 14
+      Height = 17
+      Hint = 'Triangle'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 13
+      OnClick = c_padClick
+    end
+    object c_pad_R1: TCheckBox
+      Left = 152
+      Top = 19
+      Width = 14
+      Height = 17
+      Hint = 'R1'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 10
+      OnClick = c_padClick
+    end
+    object c_pad_R2: TCheckBox
+      Left = 152
+      Top = 3
+      Width = 14
+      Height = 17
+      Hint = 'R2'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 9
+      OnClick = c_padClick
+    end
+    object c_pad_L2: TCheckBox
+      Left = 4
+      Top = 3
+      Width = 14
+      Height = 17
+      Hint = 'L2'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 5
+      OnClick = c_padClick
+    end
+    object c_pad_L1: TCheckBox
+      Left = 4
+      Top = 19
+      Width = 14
+      Height = 17
+      Hint = 'L1'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 6
+      OnClick = c_padClick
+    end
+  end
+  object lst_spyro: TListBox
+    Left = 185
+    Top = 3
+    Width = 96
+    Height = 123
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Arial'
+    Font.Style = []
+    ItemHeight = 14
+    ParentFont = False
+    TabOrder = 6
+  end
+  object c_spyro: TCheckBox
+    Left = 240
+    Top = 153
+    Width = 19
+    Height = 17
+    TabOrder = 8
+    OnClick = c_spyroClick
+  end
+  object c_spyro2: TCheckBox
+    Left = 262
+    Top = 153
+    Width = 19
+    Height = 17
+    Enabled = False
+    TabOrder = 9
+    OnClick = c_spyro2Click
+  end
+  object b_clear: TButton
+    Left = 188
+    Top = 151
+    Width = 46
+    Height = 22
+    Caption = 'Clear:'
+    TabOrder = 7
+    OnClick = b_clearClick
+  end
+  object e_spyro: TEdit
+    Left = 185
+    Top = 127
+    Width = 96
+    Height = 22
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 10
+    Text = '0x00000000'
+    OnChange = e_spyroChange
+  end
+  object b_rename: TButton
+    Left = 4
+    Top = 109
+    Width = 58
+    Height = 23
+    Caption = 'Rename!'
+    TabOrder = 11
+    OnClick = b_renameClick
+  end
+  object e_rename: TEdit
+    Left = 66
+    Top = 110
+    Width = 113
+    Height = 22
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 12
+    OnChange = e_spyroChange
+  end
+  object file_save: TSaveDialog
+    DefaultExt = '.SaveState'
+    Options = [ofOverwritePrompt, ofHideReadOnly, ofNoChangeDir, ofPathMustExist, ofEnableSizing, ofDontAddToRecent]
+    Left = 88
+    Top = 20
+  end
+  object file_open: TOpenDialog
+    Options = [ofHideReadOnly, ofNoChangeDir, ofPathMustExist, ofFileMustExist, ofEnableSizing, ofDontAddToRecent]
+    Left = 127
+    Top = 20
+  end
+end

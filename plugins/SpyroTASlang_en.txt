@@ -1,0 +1,1589 @@
+$SpyroTASlang_en
+
+$m_help
+
+Spyro Tool-Assisted Speedrun plugin by Kly_Men_COmpany!
+
+*** For now here will be an updated English guide ***
+
+== how it's work ==
+
+- this plugin will intercept some important functions of the emulator.
+- it will remember all pressed keys as you play.
+- then SpyroTAS will able to reproduce it, to trick the emulator and the game!
+- if you can set an external input plugin also, then SpyroTAS may use that.
+- otherwise, SpyroTAS will send windows keyboard messages to game window.
+
+== requirements ==
+
+- an emulator with PSEmuPro plugin interface; Epsxe is a primary candidate, also Pcsxr should work.
+- OS Windows XP or above. SpyroTAS was developed under XP, and sometimes you may have difficulties to make it work on Win >=8, but it is generally possible.
+- a PlayStation 1 game which is playable by standard "Digital" controller with 14/16 buttons (no analog and stuff).
+
+== installation ==
+
+- copy gpuSpyroTAS.dll to your emulator plugins directory. Also "_Laz" version should work.
+- run the emulator and select SpyroTAS as a video plugin.
+- go to video plugin config and select there your real GPU plugin.
+- (IMPORTANT!) if you can select any external PAD (input) controller plugin in emulator, skip this now and read "PAD routing" below.
+
+- open "[Keys]" window. There you should assign keyboard mappings.
+- most important thing is keybindings. You must set emulator (or pad-plugin used by the emulator) PlayStation buttons to some keyboard keys that you actually don't want to use to control the game. Better is to choose alphabetical characters.
+- then you should put the same keys to SpyroTAS configuration. Defaults are: Up=W, Right=D, Down=S, Left=A, Triangle=T, Circle=H, Cross=G, Square=F, L1=E, L2=Q, R1=R, R2=Y, Start=C, Select=X.
+- now choose some other virtual keys that will be used to control the game. Default mapping is: Up=UP, Right=RIGHT, Down=DOWN, Left=LEFT, Triangle=END, Circle=NUM_0, Cross=RIGHT_CTRL, Square=RIGHT_SHIFT, L1=DELETE, L2=INSERT, R1=PAGE_DOWN, R2=PAGE_UP, Start=SPACE, Select="/?".
+- make sure no key is used twice, and also not used by emulator itself, other plugins or hotkeys.
+- skip next part and read "hotkeys" below.
+
+== PAD routing ==
+
+- SpyroTAS can use a real input plugin instead of spamming Windows Messages.
+- select any simple real input plugin in SpyroTAS config window (in video plugin settings). "PadSSSPSX.dll" (included, copy to plugins folder) is recommended.
+- restart emulator. Go to input plugin setting and choose "SpyroTAS helper" for both controllers. Real plugin keybindings will not be used (it's okay to leave them unassigned).
+- open SpyroTAS config window again and set in "Virtual for SpyroTAS" your keys that will be used to control the game.
+- buttons in "real port" table would be ignored.
+- now routing should be enabled (you can later check that in hotkeys tab when playing a game).
+
+== hotkeys ==
+
+- some frequent and useful plugin functions are available by hotkeys.
+- you can read their meanings with context helps in keybindings window.
+- default are: Save=APPLICATION ("menu"-key near to right Ctrl), Load=ENTER, Previous=BACKSPACE, Timepoint=NUM_DIVIDE, Swap=TAB, No limit=NUM_ADD, Advance=NUM_SUBSTRACT, Exit=F10, Warp=NUM_MULTIPLY.
+- Hotkey "Exit" (F10) is one that cannot be completely unset. Hold it to terminate the emulator when plugin is hung.
+
+== run ==
+
+- start a game in emulator (better to use windowed mode).
+- you will see a button at top-left corner of screen.
+- press it when available; you will lose your emulator savestate in first default slot.
+
+== terminology ==
+
+- history: is an invisible log of pressed PlayStation controller keys for each played frame.
+- keystate: it is a savestate in history list, with associated frame number. Visible on screen.
+- last (recorded) timepoint: is a very important frame number, so everything before is considered as "already recorded, will be played back", and everything after is "not yet recorded, but will be".
+
+== statuses ==
+
+- emulator must be on foreground when playing or recording history (especially if PAD routing is not enabled). Thus, plugin windows will not have keyboard focus, despite being on top of others.
+- there is a "free" mode that allows you to switch focus to other applications, but history will not be played.
+- if you need to type something somewhere, better click bottom-right color panel to freeze the emulator and gain keyboard focus. (Even with PAD routing, all hotkeys are tracked globally and could cause unwanted F1/F3 to other application for example).
+- read all context hints on GUI elements to know more. Note a thin line at very top-left corner of the screen (desktop), used to hide and show everything else.
+
+== starting a history ==
+
+- press "Free" to return to the game. If you need to load your own savestate, do it. But don't forget to restore state slot to first default.
+- if there are keystates, delete them. Or click the status panel.
+- press "Restart". If you got green, it's done!
+- do not press any real emulator keyboard keys (if PAD routing is not enabled), also don't directly hit F1/F2/F3 (slot manipulation) when recording or playing.
+
+== adding new keysatetes ==
+
+- press "Save" (hotkey preferred) when recording. You will see a new entry in the history list.
+- last timepoint will be adjusted to it. Now everything before is considered recorded.
+
+== loading a keystate ==
+
+- select a keystate in the history list and press "Load".
+- game will jump to that moment. If the last timepoint is bigger than current frame, history will be played.
+- you can use a hotkey to quickly re-record from last keystate (just like you normally would use F3).
+
+== changing history ==
+
+- you can re-record any parts of history, but obviously every keystate that follows will be no longer valid.
+- press "Current" (or a hotkey, or even adjust manually) at a moment after you wish to change history.
+- now play through it, and overwrite the end.
+- when done, press "Save". It should delete all following keystates and create a new one, changing last timepoint to it.
+- if you failed in editing last timepoint, and overridden some important parts, you still can undo it: press "Current" with right mouse button (history will be reloaded from disk, as from last saving or deleting a keystate), or hold corresponding hotkey.
+
+== intermediate keystates ==
+
+- when you have a history with a good keystate at the end, but you need to create a new keystate in-between, it is possible. "Hash" must have been used.
+- press "Save" (or the hotkey) while history is played. The plugin will try to save a keystate without altering the history.
+- if there was changing in keypressings, this will be unsuccessful. Hash will mismatch when you try to load from such keystate. Delete it.
+- repeat until the correct one keystate happens to be created.
+
+== better way to improve history ==
+
+- often you can save only after something cool is done, but the end wad bad.
+- you can save a keystate before that and immediately delete the wrong end (without "intermediate keystates" limitations).
+- click "Save" with right mouse button just at that moment (it's like "Current" + "Save").
+- to do this via hotkeys, first load and set last timepoint to desired moment.
+- then load again and hold "No Frame Limit" to stop execution just before it.
+- save here. In this special case, an intermediate keystate won't be created.
+- oh, even better way! When playing, hit "frame advance". Now do "Current" and "Save" as hotkeys.
+- that way you will always have good continuous history.
+
+== precise control ==
+
+- keep loading history with a hotkey until you success in what you want.
+- save a keystate with a hotkey. Do not hurry, time isn't relevant.
+- use a hotkey to jump to a previous keystate. History will be played.
+- in a proper moment hit a hotkey to change last timepoint to current frame.
+- load the keystate with a hotkey again. You will be able to play last part of this run some different way.
+- or you can create a keystate directly in any moment, as explained above in "better way".
+
+== archiving history ==
+
+- when you did something good, it's wise to create a copy of history and all keystates.
+- click "Store". When you need to reload it, select and press "Unpack" (in "[Ext]" window).
+- you can rename files directly in "\SpyroTAS\" directory (hide n' show window to reload list), or by right-clicking the list.
+
+== history integrity ==
+
+- check "Hash" before recording a history.
+- now playing history will check CRC of game memory.
+- if something went wrong, you will see status change.
+- when you got rapid flashing, it still may mean that it's OK.
+- but a permanent mismatch means that you probably have to re-record that.
+- also you can recalculate hash for a part of history. Check "Semi" (but make sure that all semi-key button checkboxes are off, in "[Ext]"), set threshold to "1" - and now any played frame will recalculate its hash. Uncheck when done.
+
+== autofire ==
+
+- if a button must be pressed very rapidly, you may try to use turbo mode.
+- check "Auto" in main form.
+- go to "[Ext]" window and check each button you need turbo.
+- now this button will be pressed with random small intervals; uncheck "Auto" when done.
+
+== record only some buttons ==
+
+- you may wish to record several buttons while others will be preserved from history.
+- this will rewrite parts of your history, use with care!
+- check "Semi" on main window.
+- check all buttons that must be recorded again in the "[Ext]" window checkboxes panel.
+- now set a non-zero threshold value. It is a first frame after which those keys must be overridden. Can be done by "Current" button or the same hotkey.
+- in this mode frame hashes are recalculated.
+
+== pad overlays ==
+
+- you can visually see which pad buttons are presses. Press "[Over]" (in "[Capt]" window).
+- overlays can be resized, and it's possible to put them on top of the game.
+- transparency of overlays is also can be adjusted.
+- there are two overlays, for two controllers.
+
+== counter overlays ==
+
+- click to "[Over]" with right mouse button, twice.
+- you will get two overlays with numbers. One is just a frame counter.
+- the second is "re-records" counter. That is, how many times keys were recorded over and over.
+- re-records value is stored in the history for each frame, and silently updated while you work.
+- you can change text alignment and outline size (plus color inverse mode).
+
+== framelimit ==
+
+- to slowdown the game, you can use a frame limit.
+- firstly, disable any framelimits and frameskippings in the emulator and a real video plugin.
+- check "Limit". Now the game will be slowed down to a FPS value adjusted above.
+- you can hold a hotkey to temporary disable the limit. Also, if you need to approach to last timepoint, simply load a keystate and hold this - the game will go frame-advance just before that.
+
+== frame skipping ==
+
+- can be used to quickly fast-forward a part of history. May cause desyncs in some games.
+- check "Skip" and uncheck "Limit". Also, now you can hold a limit-disable hotkey to temporary activate frame-skipping.
+
+== second controller ==
+
+- history is separated for two controllers. Even when history is recorded, it does not touch other controller track.
+- to switch controllers, check "2-nd" or press a hotkey. Now the same virtual keys will trigger second pad button pressings.
+- that way you can record a history for two players by alternating between them.
+- this also works for key-toggle (frame-advance) mode, but only for one controller at time.
+- actually, you shouldn't save a keystate when doing a second overlapped track for other controller. Just manipulate last recorded timepoint. Also you may try to create an "intermediate keystate" later.
+
+== screenshots ==
+
+- SpyroaTAS can capture the emulator window to images or video file.
+- open "[Capt]" and adjust settings there.
+- you can place pad overlays on top your emulator game window if you wish to record them too.
+- check "Shot". Now a new capture sequence will be recorded.
+- when "Diff" is checked, the screen is captured only for real frames when something new was displayed; may not work for each game.
+- when "Ever" is unchecked, screen will be captured only when playing or recording a history.
+- you can set PNG compression or AVI framerate. Also for video you need to choose a codec.
+
+== editing video ==
+
+- you can capture to images instead of video, and then combine them.
+- go to "\SpyroTAS\shots\*\" and simply delete frames you don't need.
+- press "Combine..." in "[Capt]" window.
+- select any image in your sequence. All existing .png/.bmp will be processed in alphabetical/system order.
+- choose a codec now, but don't forget to adjust playback FPS before.
+- wait until done, window title shows progress.
+
+== frame advance / key toggle ==
+
+- it is possible to play the game frame by frame.
+- use a hotkey or right-click status panel to enter this mode.
+- now currently pressed pad buttons are toggled; open overlays to see it.
+- keep pressing or holding advance hotkey.
+- to exit this mode, press "no frame limit" hotkey, or do a load/save keystate.
+- you can set last recorded timepoint while in frame advance. Especially useful before saving new keystate.
+
+== warping in history==
+
+- you can literally rewind time, but only visually. Check "Warp".
+- this may not work for every game! Also you will see texture artifacts when scenery is significantly changes.
+- now press a hotkey or middle-click the status panel.
+- use frame-advance hotkey to play forward. If you hit the starting point, you will transparently leave warping mode (some frames may be missed when warping back).
+- you cannot save a keystate or change the history that way, despite overlays and frame counter will show warped values.
+- you still can load a keystate, or set the last timepoint to current value.
+
+== exporting movie ==
+
+- you can export your history along with the first keystate.
+- press "Export" in "[Ext]" window. Save the file.
+- there will be two of them. You can drag-and-drop it to status panel to import back, or click "Export" with right mouse button and select.
+- generally, the history may play correctly only in the same emulator, with the same plugin set, with the same ISO file and BIOS. Not really strictly, but check and you'll see.
+- if you started from a savestate, and your history is inside one game level, you may try to start by loading into emulator a dumb CD image (for example "SavestateRunner.bin", included) to remove a dependence to an original ISO.
+
+== editing raw history ==
+
+- sometimes you may want to see the history internals. Double click current frame counter.
+- this is hashes, re-records, buttons and keystates list. You can operate it as a simple text.
+- press "Accept" to save your changes. Don't waste your time trying to convert any other TAS movie to this format to make it work, because it will most certainly fail anyway.
+
+== fullscreen ==
+
+- it is possible to run a fullscreen emulation with some video plugins.
+- do not freeze the game, or the emulator will lose focus and won't restore.
+- to pause the game, use frame-advance (right click to the status panel) instead.
+- to properly set up a video codec (or other operation involving dialogs), firstly minimize/pause the emulator itself (Esc).
+
+== standalone run ==
+
+- you may want to open SpyroTAS without an actual emulator. For example to change some settings, or to use image combine feature.
+- put "SpyroTAS.bat" to your plugins directory along with "gpuSpyroTAS.dll", and execute it.
+- of course most functions will not work.
+
+== coordinate measurement==
+
+- there is one feature that later will be changed to external scripting, but for now it's here.
+- if you know a PSX memory offset to XYZ coordinates of your playable character (and if they are 32-bit integers), you can enable that.
+- paste the offset to "[Ext]" window.
+- go to a space position in game where you want to measure your jump height.
+- check the first checkbox. Each time you move through it, you will see Z value.
+- also you can measure a frame count between two 3D points.
+- check the first checkbox at staring point, and the second at finishing.
+- now each time you approach by the straight line from start to finish, you'll see elapsed frames count. Try to begin slightly before and go through.
+
+== quick loading savestates ==
+
+- plugin allows to quickly load an arbitrary emulator savestate. This can crash when the game try to read something from CD.
+- drag and drop a savestate file (*.001 for example) to the status panel.
+- this will override your first keystate in history!
+- also, when corresponding exported history is found, it is also loaded and replaces yours.
+
+== recording from boot ==
+
+- it is possible to start a history from the game start without a savestate.
+- delete all your history.
+- click "Restart" with right mouse button.
+- the emulator will be restarted and SpyroTAS automatically invoked.
+- recording is started. Save a first keystate, so you don't have to restart again to work.
+- to play such history from the game booting, click "Restart" with right mouse button again.
+- since there are keystates, the history will be played.
+- to export the history, just ignore a savestate file later.
+
+== special "Sprint" mode ==
+
+- sometimes you may need just a load + save behavior, without this fancy TAS cheating.
+- so you will have only one attempt to record something (but you can repeat as much as you want).
+- you still will be able to record a video from it, but not modify the history itself (referred as "movie").
+- to start this, firstly put a savestate from which you plan to begin - to a keystate in history list.
+- select it and click "Delete" with right mouse button!
+- you're prompted to export that savestate to an external file, do it.
+- done, Sprint mode is active. There are five main buttons you need:
+- "Load" (default hotkey) - start current movie from the beginning. Either to play, or to record.
+- "Save" (default hotkey) - store your movie to a new file next to exported savestate; from now you'll be able only to replay it back, but not change.
+- "Restart" (hotkey "Previous" is used) - discard current saved movie, and start recording from beginning. Actual movie file is not deleted, nor replaced with new one (since Save creates unique names).
+- "Free" - stop playing or recording, allow lose focus - everything as normal free-mode.
+- "Current" - used to exit Sprint mode. This restores all disabled functionality.
+- you can control the game only after 30-th frame from the beginning. You may hold an appropriate pad-button and just wait it to effect.
+- many other features are disabled, but you still have frame-limit, auto-fire, second-controller, and full screenshoting capabilities.
+- counter overlays are tracking your FPS as you play: each value is represented in frames per second, multiplied by 1000;
+- when a movie is done, all frames real FPS is averaged, and standard deviation is calculated (represented as negative numbers in free-mode).
+- hash is checked twice, before and after your run. If first check fails, you will see a purple status, then black at the end. When something wrong during playback, status will be purple after finish, otherwise - aqua (here means "OK").
+- to load a movie, drag-and-drop ".SpyroTasSprint" file to status panel, or import it by right click on "Export".
+- even though files are slightly encrypted, you should NOT reliably trust them to be recorded without cheating, since the source code of SpyroTAS itself is open (and simply because it is possible to use another pad-replay mechanics to trick it anyway).
+
+== troubleshooting ==
+
+- sometimes you may try Windows compatibility mode (cast to the emulator executable).
+- overlay windows may flash on low hardware, but should be captured fine.
+- do not run your emulator from a strange path (f.e. "Program Files"), especially with Unicode characters in it. Never.
+- if your keys behaving strangely, or cause desyncs - make sure that no key is used twice. Also don't forget to check keybindings in the emulator itself, for both controllers, secondary binds, etc.
+- always disable frame skipping in video plugin (but frame limit is fine).
+- if no video codec is working, you have to record in uncompressed format, and convert it with something else.
+- when you messed up configuration so the emulator couldn't even start - delete "SpyroTAS\SpyroTAS.ini".
+- if you cannot load or save keystates, make sure that current state slot is set to default one.
+- if saving failed (or you accidentally lose focus), but you need to preserve the history - adjust last timepoint to something big / press "Current".
+- do not work with other applications in "Free" mode, it may send a lot of junk keypressings there (especially when PAD plugin routing is not used).
+- if your gameplay stalls badly, make sure that you didn’t disable sound output in emulator settings.
+- set width for a video to be divisible by 4. That way .avi/.png images will be 24-bit depth instead of 32.
+- sometimes real frame position for a keystate may significantly differ from what is showed in history list. You can try to fix that by editing the history manually (move a keystyate mark to the proper line).
+- record with "Hash" enabled if you care for a desync-free history. Always try to load from a new keystate, and from a previous to run through and check mismatches.
+- when sharing your history, don't forget to tell exact versions of: emulator, BIOS, game image, SpyroTAS; used plugins for sound, input, video; common emulator settings. Something may break syncing quickly, other things are not important at all, but you never know...
+- do not change any settings of emulator (e.g F4) or video plugin during recording, it may corrupt playback later.
+- if you feel that game runs significantly slow when recording and playing, uncheck "Hash".
+- in some OS you may see "window irresponsible, terminate it?" system message, especially in Warp, frame-advance or freeze mode. If so, never choose to close (but "wait response"), and try not to click/move mouse on emulator window that much.
+- I still don't know how in-game memory cards are affecting to desyncs. If you're up to record an entire playthrough of the game - consider to NOT have any memcards connected in emulator.
+
+
+$cb_language
+Select the language for context hints for all SpyroTAS windows.
+This does not change labels on buttons though.
+
+Currently, only English and Russian are supported.
+
+
+$b_ok
+
+"Ok":
+Save selected real plugin and close this window.
+
+NOTE: when SpyroTAS is running standalone via RunDll32,
+  this button will show the main form; closing window will exit.
+
+
+$b_test
+
+"Test":
+Call standard test check on selected GPU and PAD plugins.
+Message box will be displayed.
+
+That's also called when the emulator tests SpyroTAS as video plugin.
+
+
+$b_configure
+
+"Configure":
+Open standard options dialog for the selected GPU plugin.
+
+To configure a selected PAD plugin, click with right mouse button.
+
+
+$b_about
+
+"About":
+Show standard "about" window for the selected GPU plugin.
+
+To read about a selected PAD plugin, click with right mouse button.
+
+
+$b_refresh
+
+"Refresh":
+Search GPU and PAD plugins again and recreate the list.
+
+Also, this will fill name and version of current selected plugins.
+
+
+$cb_gpu
+
+List of real GPU plugins.
+
+The search is done in emulator's root dir,
+  in every subfolder (1 level down) and in a parent folder.
+
+Every single DLL is checked, but will not be executed until you
+  select it in this list for once.
+
+You can configure any plugin from here, press "Configure" below.
+Note that you cannot choose the current instance of SpyroTAS
+  itself (though it listed, but buttons will be disabled).
+
+
+$cb_pad
+
+List of real PAD plugins.
+
+The search is done as for video plugins list below.
+You can force SpyroTAS to use a real controller plugin
+  to improve performance. Then pressed keys would not send
+  windows messages to the emulator window, allowing it to lose focus.
+
+After changing this value (especially the first time), you will have
+  to restart the emulator and select "SpyroTAS helper"
+  as plugin for both controllers in the emulator menu.
+
+
+$l_gpu
+
+Name and version of currently selected GPU plugin.
+
+Note that it is not the filename of DLL, it's just what
+  plugins decided to tell to the emulator.
+
+
+$l_pad
+
+Name and version of currently selected PAD plugin.
+
+Note that it is not the filename of its DLL, it's just what
+  plugins decided to tell to the emulator.
+
+
+$b_padkeys
+
+"[Keys]". Opens keybindings window,
+  just like when SpyroTAS is running.
+
+
+$e_states
+
+Name of the emulator savestates directory.
+You should set it to as it is called in your emulator.
+
+Default is ".\sstates\" (which is almost always correct).
+
+
+$se_warp
+
+Warp movie disk buffer quota, Mb.
+
+This is value in megabytes, controls the maximal
+  size of recorded GPU movie for "Warp".
+
+Movie is always recorded to temporary files, you
+  can set their maximal allowed size. Then
+  old files will be overridden to fit.
+
+There is no exact relation to movie length in seconds,
+  it highly depends on a game and scene complexity.
+
+Default value is 16 Mb (allowed 4 - 256).
+
+
+$b_invoke
+
+Initialize and start SpyroTAS plugin.
+You can close this window to disable it instead.
+
+Activation of SpyroTAS requires an automatic savestate,
+  that will be triggered for current slot (please, leave first default),
+  so you'll lose your first savestate (for purpose!)
+
+Also the emulator window must be in foreground.
+This button is enabled only after a game initialization.
+
+Right click this to display the plugin configuration dialog!
+
+
+$grd_hot_0_1
+
+Shortcut to "Save" GUI button.
+
+When used just before the last recorded timepoint (holding NoFrameLimit),
+  it will behave as right-click to Save (like "Current" + "Save").
+
+In Sprint mode: finish the movie and save it (just as "Save" does too)
+
+
+$grd_hot_0_2
+
+Shortcut to "Load" GUI button.
+
+In Sprint mode: rewind current movie
+  for playing or recording (just as "Load" does too).
+
+
+$grd_hot_0_3
+
+Select previous history keystate and load it.
+Useful to "cancel" the last saved keystate.
+
+Hold it for a second to jump to the
+  last available keystate!
+
+In Sprint mode: discard current movie and
+  restart from the beginning (shortcut to "Restart").
+
+
+$grd_hot_0_4
+
+Shortcut to "Current" GUI button.
+
+Hold it to perform right-click action on Current button -
+  that is, to reload entire history, discard changes and
+  start playing from the first keystate.
+
+In Sprint mode: no action.
+
+
+$grd_hot_0_5
+
+Shortcut to "2-nd" checkbox
+
+Change between first and second controller.
+
+
+$grd_hot_0_6
+
+Hold to ignore "Limit" checkbox.
+
+Also used to exit the frame advance
+  and warp movie modes.
+
+Hold it after a keypoint loading,
+  and SpyroTAS will pause to frame advance
+  just before the last recorded timepoint!
+
+
+$grd_hot_0_7
+
+Press this to record or play the game frame by frame.
+To advance to the next frame press it again. Holding also works.
+To restore the normal speed - press "No frame limit" hotkey once.
+
+In this mode all pad buttons are toggled. You may just press them
+  instead of hold. Works for the second controller too.
+
+Use pad overlays to have precise control of what is being pressed!
+
+You can issue a saving or loading keystate,
+  which terminates the frame advance mode.
+
+In Sprint mode: no action.
+
+
+$grd_hot_0_8
+
+Hide and show all windows including left-top line toggle.
+But excluding pad overlays (again).
+
+Hold for 1-2 seconds to emergency exit SpyroTAS
+  and halt the emulator!
+Useful if deadlock or hang occurred.
+
+Default is F10.
+
+
+$grd_hot_0_9
+
+Warp movie mode, backward direction.
+Works only if "Warp" is active.
+
+Firstly, this enters warp mode.
+Press it to move a frame backwards.
+Hold to play backwards (till the beginning).
+
+To opposite actions (frame forward, play forward)
+  use "Frame advance" hotkey. That will also
+  exit warp mode when played till current time.
+
+In Sprint mode: no action.
+
+
+$grd_pad_0_0
+
+These keys are referring to PlayStation's
+  16 buttons of PAD controller.
+
+Make sure than no single key is
+  used twice, anywhere, here and there!
+
+
+$grd_pad_1_0
+
+Set here your keyboard keys that you
+  actually want use to control the game.
+
+
+$grd_pad_2_0
+
+Put here those keys, that your emulator
+  expects you to press to control the game.
+It will be used to trick the emulator.
+
+Recommended to set these buttons to simple
+  alphabetical keyboard keys, and modify
+  your pad-plugin or emulator bindings accordingly.
+
+NOTE: if pad routing mode is installed and working,
+  you don't need these bindings at all!
+
+
+$grd_pad_3_0
+
+You can set here your emulator bindings
+  for the second pad controller.
+
+In SpyroTAS, "virtual" keys are mapped
+  either to first or to second controller.
+So again, choose keys that are not used anywhere.
+
+If you need only one controller, leave this empty.
+  (also with pad routing mode).
+
+
+$grd_hot_-1_0
+
+Set here some important hotkeys
+  for SpyroTAS' functions.
+
+Several shortcuts are equal to
+  window buttons, but others
+  have unique behavior!
+
+
+$grd_emu_-1_0
+
+Please, provide emulator internal
+  shortcuts for listed here functions.
+
+SpyroTAS will send those keys to
+  the emulator to trigger that.
+
+
+$grd_emu_0_1
+
+Which keyboard key your emulator
+  uses to make a savestate?
+
+Most common in F1, but you may
+  adjust it here in case.
+
+
+$grd_emu_0_2
+
+Which keyboard key your emulator
+  uses to load a saved state?
+
+Most common in F3, but you may
+  adjust it here too.
+
+
+$c_pad_routed
+
+Indicator (read only): is PAD helper used?
+
+By default, SpyroTAS will trick the emulator by sending windows keypress
+  events to simulate controller button pressings. If your emulator
+  allows you to change PAD input plugin to external one, then SpyroTAS
+  could use that to simulate input. It may improve performance.
+Also you will be able to set the game window to background during play!
+
+This checkbox will be checked if such pad routing is currently active.
+To set it, you should go to SpyroTAS real plugins config and select there
+  any PAD plugin you like. Keyboard keys which will be selected in its config
+  are left unused, because SpyroTAS will use "Virtual for" bindings instead.
+
+To activate routing, you must select "SpyroTAS helper" as your input plugin
+  (it should be saved as .dll file automatically next to current SpyroTAS.dll)
+
+When PAD routing helper is active, the "Emulator port" bindings are not used!
+
+
+$fhide
+
+NOTE: this very small 1x32 pixels top-most line at top-left corner is used
+  to hide and show all windows (except for pad overlays) of SpyroTAS!
+
+Right click to toggle windows appearance.
+
+Click and hold left mouse button to lock mouse cursor visibility when moving
+  to other windows (can be useful in fullscreen emulator mode
+  if mouse cursor is otherwise will be hidden)
+  - just click and drag.
+
+You can configure a hotkey to toggle windows with single press, default is F10.
+It will even hide this very window, be careful not to lose plugin!
+Note that it is shared with "HALT" action (there you must hold for a seconds).
+
+Also this hint message will be disabled after a click.
+
+
+$lst_history
+
+History list. These are positions where you have a keystate.
+All data is saved between sessions.
+
+Select one and press "Load" to start playing from it.
+
+Double-click will set the last recorded timepoint to maximal available
+  history position (bottom-most keystate) before loading an entry.
+Right click will load that without playing (in "Free" mode).
+
+You can customize a hotkey to select and load a previous keystate,
+default is Backspace. (Hold that to jump to a last one instead).
+
+In Sprint mode: this list is disabled.
+
+
+$b_restart
+
+"Restart". Restarts recording from zero position.
+Enabled when the history is empty or
+  when the game is frozen (to prevent an accidental click).
+
+WARNING: this will erase all saved keystates and clear all history, if you have any.
+
+Since restarting does saving and loading,
+  thus status panel shall be red, then yellow, and then green.
+
+Also you can start recording at very beginning of the emulation.
+That way your history will be recorded from boot, not from a keystate.
+To do this, delete all keystates and click "Restart" with right mouse button.
+
+To load a history from boot, click with right mouse button too,
+  but now when there is some keystates in history. Emulator will be restarted!
+
+In Sprint mode: erases current movie, restarting from a savestate again.
+Actual movie in the old file will not be deleted!
+Note that "previous" (Backspace) hotkey now will do restart action.
+
+
+$b_load
+
+"Load". Loads a selected keystate and starts playing history.
+Enabled only when something is selected in the history list.
+
+When loading, status panel will be yellow until loaded;
+  after that it will be blue or green, according to last recorded timepoint.
+
+You can customize a hotkey to load the selected keystate, default is Enter.
+
+Also you may want just to load the keystate in "Free" mode, without playing
+  - to do this, you can click "Load" with right mouse button.
+
+In Sprint mode: load the savestate again and play it.
+If there is no current movie, recording will take effect.
+With a movie, it will be played back.
+
+
+$b_current
+
+"Current". Sets the last recorded timepoint to current frame position.
+Enabled when current position is valid (playing or recording history).
+
+You can see and change the last timepoint in the bottom editbox manually.
+Middle readonly editbox shows actual current position frame counter if valid.
+So this button will simply copy that number.
+
+NOTE: when "Semi" is checked, this button has different function:
+It will set semi-keys threshold timepoint (top editbox) to current position.
+So it will copy the contents of middle editbox to upper one.
+
+Also you can configure a hotkey to do it, default is Divide.
+In free mode the hotkey will freeze the game instead of do "Current".
+
+You can discard all changes made in history cause of
+  wrong adjustment of last recorded timepoint.
+To do this, right-click this Current button. Then, history will
+  be reloaded and starts playing from the beginning.
+(Note that you can undo everything until when keystate was saved or deleted).
+
+In Sprint mode: exit the sprint mode!
+
+
+$b_free
+
+"Free". Resumes the game if it was frozen, disables recording or playing history.
+Allows emulator window to lose focus, since during playing or recording
+  the game will freeze when focus is lost (preventing unnecessary keystokes).
+
+This is a normal way to simply un-freeze the emulator, or to stop recording.
+In free mode, the color of status panel will be black.
+
+Later you can use "Load" (also as hotkey) to start playing history again.
+
+When you need to load a savestate that is stored as a first keystate,
+  even with empty history list - you must click "Free" with right mouse button.
+In that case, "Load" hotkey (not button) won't start playing history, it will just load game.
+(So right-clicking "Free" is the same as right-clicking "Load" on first keystate selected).
+
+
+$b_save
+
+"Save". Saves a keystate to history list, also writes the history to disk.
+Enabled only during playing and recording.
+
+When you started by loading a last keysatate, then
+  saving is pure - it robustly creates a new keystate at the end.
+
+If you try to save in-between keystates when playing,
+  then saving will be weak, and not always valid!
+
+Note if you save before the last keystate, but when
+  recording has an effect - then some of the following
+  keystates will be lost! (All after last recorded timepoint).
+
+When saving, the status panel will be red, then green (or blue).
+If save was unsuccessful, soon you will get white and return to GUI.
+
+You can configure a hotkey for saving,
+  default is Application (Context menu).
+
+NOTE: if you need to do "Current" + "Save" to save and discard all
+  following keystates, you can click this with right mouse button!
+
+In Sprint mode: finish current movie and save it to a new file.
+To view it, use Load button; to record a new one - Reset.
+
+
+$b_delete
+
+"Delete". Removes a selected keystate from the history list.
+Also updates files on disk immediately, but key history itself is not changed.
+Enabled when there is a selected keystate.
+
+Can be used to delete a keystate from the middle of a sequence.
+Next one will be selected after a deletion.
+It does not update the last recorded timepoint.
+
+In Sprint mode: disabled. BUT! It is actually used to enter the sprint mode:
+Select a keystate from which you wish to start a movie.
+Then click "Delete" with right mouse button (don't miss!)
+You will be prompted to export a savestate file (just like "Export" in [Ext] works).
+Then Sprint mode will be targeted to that filename.
+
+In the sprint mode you will have only one attempt to record a movie.
+Many of TAS-related functions will be disabled, recording starts after 30 frames.
+Game memory is hash-checked two times: on the beginning and at the end.
+To view a sprint-movie, import ".SpyroTasSprint" file by status panel or Ext-Export.
+
+
+$b_keys
+
+"[Keys]". Opens or closes keybinding settings window.
+
+There you can configure:
+- your real emulator pad input (keys that emulator expects you to press)
+- virtual keys for SpyroTAS that you will actually use to control the game
+- hotkeys for some important operations for this plugin
+- quick help guide!
+
+The window is opened slightly below this button by default.
+
+NOTE: you can click "[Keys]" with right mouse button to open pad overlays!
+
+
+$b_ext
+
+"[Ext]". Opens or closes secondary window, where you can:
+
+- archive (or restore) full history with all keystates to a list
+- export your history to external file with only first initial keystate
+- set pad buttons that will be affected by semi-keys and auto-fire features
+- work with game-specific coordinate measure feature
+
+The window is opened on the right by default.
+
+NOTE: you can click "[Ext]" with right mouse button to quickly
+  do "Store" operation there without having to open the window!
+
+
+$b_capt
+
+"[Capt]". Opens or closes screenshot capture window. It is used to:
+
+- set target image format (BMP, PNG or AVI video)
+- change PNG compression and set AVI playing framerate
+- choose video compression codec
+- combine series of BMP or PNG images to one AVI video
+- set recording options: to skip identical frames and to allow shot in "Free" mode
+- open controller pad buttons transparent overlays, and counter overlays.
+- open screenshot preview window
+- adjust overlay transparency
+
+The window is opened on the bottom by default.
+
+NOTE: if you only want to display counter overlay,
+  you can simply click "[Capt]" with right mouse button!
+
+
+$b_halt
+
+"HALT". Use this button to permanently kill current emulator process!
+It is a very quick way to fully exit the emulator.
+
+Actually, SpyroTAS will firstly try to finalize current AVI recording,
+  and save some settings to INI file.
+
+You can configure a hotkey that will terminate the emulator in any case,
+  even if the plugin or a game are deadlocked and irresponsible.
+
+Default is F10, you must hold it for 1-2 seconds to "HALT".
+
+Also you may just disable SpyroTAS without killing the emulator.
+To do this, click "HALT" with right mouse button!
+  (but the keyboard will stop routing virtual keys too)
+
+
+$se_fps
+
+Game FPS limit. Sets desired frames per second speed.
+Has effect only when "Limit" is checked.
+
+Allowed to be anything from 1 to 999 frames, default is 60.
+This value is saved between sessions.
+
+Limiting works by delaying emulator execution based on
+  the elapsed time to achieve target FPS.
+
+To get better results, you should disable any external framelimits
+  in the emulator itself (F4 in Epsxe) and in a real video plugin.
+
+
+$c_limit
+
+"Limit". Activates framerate limit.
+Target FPS value is configured in the above editbox.
+
+When checked, the game will be slowed down.
+You can configure a hotkey to control FPS limit, default is Addition (Plus).
+When you press it and hold, this "Limit" will be temporary unchecked.
+
+So to properly use this feature, you must disable all in-emulator frame limits,
+  then check "Limit" and set the desired FPS to slowdown emulation,
+  for example, 10. Then, to speed up the game, you will have to just
+  hold the hotkey - and emulator will run at full speed.
+
+Also the hotkey is used to force frame-advance mode
+  just before last recorded timepoint (hold it before).
+
+
+$c_skip
+
+"Skip". This is used to activate frame skipping feature.
+
+While "Skip" is checked, and "Limit" is not - then emulator will not
+  update the game screen. You will get a maximal possible
+  execution speed, just don't forget to disable emulator's frame limit.
+
+You can use this to quickly skip a large part of history when you
+  need to replay but you don't have much keystates there.
+
+Also if you will check both "Skip" and "Limit", then holding FPS hotkey
+  will work as a temporary frame skipping, not just slightly speed boost.
+
+NOTE: it may not work with all games, or cause desync!
+
+In Sprint mode: disabled.
+
+
+$c_semi
+
+"Semi". This will activate semi-keys feature.
+
+You can record some history, and then re-record only several buttons,
+  while others will be played as were recorded before.
+
+To do this, you must set a threshold timepoint, after which you desire
+  to re-record semi-keys. This is done by editbox to the left, when it is non-zero.
+When "Semi" is checked, you can use "Current" button to set the threshold.
+
+To choose what keys you wish to re-record, open secondary window with "[Ext]".
+There will be enabled a panel with pad buttons checkboxes.
+Check that ones which you want to re-record.
+Be careful, since semi-keys will immediately override those keys tracks in history!
+
+When overriding is in effect, the status panel will be aqua instead of blue.
+
+In Sprint mode: disabled.
+
+
+$c_2nd
+
+"2-nd". Change controls to work with second game pad.
+This mode is saved between sessions.
+
+Normally, your virtual SpyroTAS keyboard keys are mapped to emulator
+  port for first controller. You can assign additional 16 keys to be used with
+  second game controller (if PAD routing is disabled), but not at the same time.
+
+When "2-nd" is checked, the virtual keys are mapped to the second pad.
+You will see keypresses on the second pad overlay window.
+History always contains tracks for both controllers!
+
+You can use a hotkey to quickly swap pads, default is Tab.
+
+
+$c_hash
+
+"Hash". Calculates a CRC to check integrity
+  of the emulator memory during recording and playing.
+This mode is saved between sessions.
+
+This will activate real-time every-frame hashing.
+To use this, you must check "Hash" before recording,
+  and keep it enabled when replaying. Also, hashes
+  are stored in files (even after export) too!
+
+When you have hash mismatch, the status panel
+  will be purple instead of blue. If this happen rarely,
+  everything is probably OK. But if you get permanent
+  purple - most likely you'll have to re-record that...
+
+"Hash" may have a performance impact, but enabled by default.
+
+In Sprint mode: disabled, but hash is actually checked twice.
+When sync is OK, you will see aqua status after playback finishes.
+Otherwise, it will be purple (but the exact desync moment
+  cannot be determined if that happens).
+
+
+$c_auto
+
+"Auto". Enables autofire feature.
+This mode is saved between sessions.
+
+When this is checked, the buttons panel at "[Ext]"
+  window will set which keys should be autofired.
+("Semi" has more priority for that panel, so you
+  need to temporary uncheck it in the case).
+
+Now all selected buttons will produce pulsed keypress
+  events when holding (pulses are random 1-4 frames).
+
+This is recorded in history as is, by many repeated pressings.
+
+
+$c_shot
+
+"Shot". Starts screenshot recordings.
+Disabled if the format is AVI but a codec is not set yet.
+
+When checked, a new empty folder (for image sequence) or
+  video file is created. Now, every captured frame will be saved.
+
+To choose a format, press "[Capt]" and use that window.
+Refer to specific settings there to know about their meanings.
+
+When unchecked, the current recorded file is finalized.
+Also, if nothing was written, the folder or file is deleted.
+
+
+$se_threshold
+
+Semi-keys threshold timepoint.
+Enabled only when "Semi" is checked.
+
+You can set here a threshold value, after which you wish
+  to re-record history for some selected pad buttons.
+Refer to "Semi" help to know more.
+
+Use "Current" to set this value to current history potions.
+NOTE: zero value have no effect, as if Semi was disabled
+  (to prevent an accidental history corruption due to a simple check).
+
+In Sprint mode: disabled, just as then "Semi" itself.
+
+
+$e_position
+
+Current history position. Readonly box.
+This is a frame counter from the beginning of current record.
+
+When you don't playing and recording, it shows "--", means that
+  there is no effective history position at this moment ("-1" internal).
+
+It is actually stored in game memory, thus saved and loaded with savestates.
+
+NOTE: double click here to open the history editing window!
+  (But not in Sprint mode).
+
+
+$se_timepoint
+
+Last recorded timepoint.
+
+When replaying a history, SpyroTAS will either record or play
+  keystrokes. This value determines a last frame to play at.
+
+If current history position is larger than last recorded timepoint,
+  the new history data is stored. When it is less - then always played.
+
+This value automatically updated when clean "Save" is made, or after
+  a doubleclick to history list. You can adjust it manually by pressing
+  "Current" button when "Semi" is off.
+
+In Sprint mode: can show either "0" or your end position, equal to
+  history size. You will not be able to adjust it, only restart again.
+
+
+$pnl_drop
+
+Status panel. Click here to freeze the game at any time!
+To release it you should use "Free" or "Load" buttons.
+
+You can drag-and-drop savestates here to load them immediately.
+Note that this will override your current history!
+Also you can drop here "*.SpyroTasHistory", "*.SpyroTasSprint"
+  exported files or just a savestate to load and run them.
+Refer to "Export" button of "[Ext]" window to know more.
+
+Click here with right mouse button to enter the frame-advance mode,
+  or with middle button to activate "Warp" feature. Controlling from here
+  is slightly different than by hotkeys (holding will not work).
+
+Color shows the current status of SpyroTAS. Here is the meaning:
+
+- black: "Free" mode, no recording or playing.
+- white: game is frozen, you can fully operate on GUI.
+- green: history is recording!
+- blue: history is played, you cannot control the game pad.
+- red: savestate was requested.
+- yellow: requested loadstate.
+- purple: hash mismatch; may be temporary if flashing with blue
+- aqua: semi-keys feature is in effect.
+- light-gray: emulator window is lost (probably you pressed Escape)
+- dark-gray: value of the internal frame counter was changed unexpectedly.
+- orange: warping is in effect.
+
+In Sprint mode: right and middle clicks are disabled;
+  aqua color means that hash is OK.
+
+
+$b_hints
+
+Toggles all context hints display on and off.
+
+Since hints also black-flashed when hided, that
+  may be annoying. Thus press here.
+
+If you asks why hints and windows flashing black -
+  it's to get rid of partial dead copies when game window is frozen.
+Note that it starts only after "Invoke" was pressed, so you still
+  may see dead copies of hints or config window before.
+
+To disable hints for future runs too, click the "!" with
+  right mouse button - this setting will be saved.
+
+
+$c_warp
+
+"Warp". Activates warp-mode, dumping of GPU commands.
+
+This feature allows you to literally rewind time, back and forth!
+Each time you do a loadstate, the warp movie will be started.
+By using a hotkey (default is Multiply), or by middle-clicking
+  the status panel, you can enter warp mode (orange).
+
+There you can visually replay everything, also frame by frame.
+To exit it, you can press "No frame limit" hotkey, or just
+  play until you got the current real position. Or "Load".
+
+Actually, the emulator isn't warped, it is frozen. So you
+  cannot save a keystate there, nor change anything.
+But you're able to see actual pressed pad buttons (overlays)
+  and target history position. Also set is as "Current".
+
+This feature has some performance impact and use disk space,
+  you may adjust allowed buffer size at configuration (16 Mb default).
+Also it doesn't properly work for every game.
+
+In Sprint mode: disabled, even for playback.
+
+
+$b_unpack
+
+"Unpack". Loads full history from the selected archive to current history.
+Enabled only when there is a selected archive.
+
+WARNING: this will override your current history!
+
+Files are stored at "\SpyroTAS\SAVE_*.SpyroTAS".
+You can move, rename or copy files there with Explorer also.
+
+In Sprint mode: disabled, as the history.
+
+
+$b_store
+
+"Store". Saves full current history to a new archive.
+Enabled when you have a history.
+
+It will be placed at the bottom of the middle list.
+
+You can have as many archives as you like.
+To make one quickly from main form, click "[Ext]"
+  with right mouse button.
+
+In Sprint mode: disabled, as the history.
+
+
+$b_remove
+
+"Remove". Removes an archive from the list and the disk.
+Enabled only when there is a selected archive.
+
+NOTE: instead of removing, you can move away an archive
+  manually (in Explorer). Also you can rename them by
+  clicking en entry in the list with right mouse button!
+
+In Sprint mode: disabled, as the history.
+
+
+$b_export
+
+"Export...". Allows you to store your history in a separate ("movie"-alike) file.
+Enabled when you have a history.
+
+You will be prompted to name and save the file. Actually there are two files:
+.SpyroTasHistory - this is a binary data of pressed buttons and RAM hashes.
+.SpyroTasSaveState - this is the first keystate used to start the history.
+
+Note that there will be no intermediate keystates!
+But you will see a fake keystate at the end - it's to have the lastest timepoint.
+
+To import .SpyroTasHistory back, you should drag-and-drop it to status panel.
+Or click "Export..." with right mouse button and choose the file.
+If SpyroTAS founds corresponding .SpyroTasSaveState, the history will be played.
+(And vice-versa, a savestate may load a history too, so you can choose any of two).
+
+In Sprint mode: well, you can right-click this anytime to load a "*.*.SpyroTasSprint"
+  file and enter the sprint mode for playback. Also you can change a part of name
+  before the last dot (which consist of arbitrary characters) as you like.
+
+
+$lst_arch
+
+Archives list.
+
+Actually, every such file is an uncompressed concatenation of all
+  components of your history, including every keystate (~2 Mb each),
+  pressed buttons, RAM hashes and keystate frame positions.
+
+When you plan to share your history, better way is to "Export" it!
+
+To rename an entry, select it and click with right mouse button.
+You will see the editbox below with "Rename" button.
+
+In Sprint mode: disabled.
+
+
+$b_rename
+
+"Rename". Click here when you entered a new name for
+  an archive from the list in editbox to the right.
+
+Visible after a right click to the archives list.
+
+If renaming is successful, the list will be updated and this
+  button will be hidden again.
+If your click has no visible effect, it means that something
+  is wrong with the name you specified.
+
+
+$e_rename
+
+Change the name of archive here.
+Also you may erase the "SAVE_" prefix!
+
+When done, click "Rename" button to the left.
+
+
+$pnl_keys
+
+Semi-keys and Auto-fire checkboxes panel.
+Active if "Semi" or "Auto" are checked.
+
+For semi, you need to check here those pad buttons,
+  which you are up to re-record.
+Refer to "Semi" to get more information.
+
+For auto, specify pad buttons to autofire.
+When both semi+auto are enabled, this panel will show
+  only "semi" values, while invisible "auto" would still work
+  (uncheck Semi to change)
+
+Each checkbox is saved between sessions.
+
+In Sprint mode: only auto-fire can be configured.
+
+
+$lst_spyro
+
+List for coordinates measurement.
+
+When only first checkbox is checked, here will be
+  the height of game character position when you
+  approaching measure point.
+
+When both checkboxes are checked, here will be
+  the elapsed time between a point where you were
+  near first target, and when you reaches the second.
+
+In Sprint mode: always empty.
+
+
+$b_clear
+
+"Clear". Clears the coordinates measurement list up here.
+Checkboxes are only enabled if the value above is valid.
+
+This feature requires you to have 3D space coordinates of your
+  playable character. It must be entered in the editbox.
+
+Note that it works only for few games, requiring you to
+  know the target memory offset.
+
+In Sprint mode: disabled.
+
+
+$c_spyro
+
+3D space position A checkbox.
+
+When checked, SpyroTAS stores current X and Y of your character,
+  and will print a Z height every time you approaching this position.
+So use it to measure how high you are at this space point.
+
+Press "Clear" to refresh list (but not position itself),
+  or recheck the box at your new point (refreshes position).
+
+This feature depends on binary offset in game memory,
+  and unavailable if you didn't provide it in the editbox above.
+
+In Sprint mode: disabled.
+
+
+$c_spyro2
+
+3D space position B checkbox.
+
+This is used as a destination 3D point when checked.
+Then, first X-Y-Z will be as a source point.
+Move your character from the first position to second,
+  and SpyroTAS will print the elapsed time in frames.
+
+Use it to find the faster way to get from A to B.
+Calculations are correct only if you follow the straight line.
+Also please start slightly before the first point, and finish through.
+
+In Sprint mode: disabled.
+
+
+$e_spyro
+
+Game offset to character coordinates.
+
+This must be a valid pointer to PlayStation RAM (2 Mb).
+Currently, only one internal game format is supported:
+X,Y,Z as 32-bit integers; it should point to X.
+
+Enter decimal number; or "0x..." / "...h" for hexadecimals.
+This value is saved between sessions.
+
+Without this the coordinate measurement will not work!
+
+In Sprint mode: disabled.
+
+
+$r_avi
+
+"Avi". Chooses video as target screenshoting format.
+
+To create proper AVI files, Windows needs a codec.
+Not every codec will work with SpyroTAS - test your luck!
+
+First time you click this, the codec dialog will be shown.
+
+Videos are saved to "\SpyroTAS\shots\AVI_*.avi"
+Playing speed is adjusted in the right editbox.
+
+NOTE: sound is not recorded by SpyroTAS at all!
+
+
+$r_png
+
+"Png". Chooses compressed images as a screenshoting format.
+
+This is preferred, but you may want to adjust PNG compression.
+Middle editbox, from 0 to 9.
+
+Images are saved to "\SpyroTAS\shots\PNG_*\TAS_*.png"
+
+
+$r_bmp
+
+"Bmp". Chooses raw bitmap images for screenshoting.
+
+Can be useful if you plan to feed them to a program
+  that supports only BMP.
+
+Anyway, you can always convert a series of images
+  to a video from here, see "Combine".
+
+Images are saved to "\SpyroTAS\shots\BMP_*\TAS_*.bmp"
+
+
+$b_codec
+
+"Codec". Prompts for a new video codec for AVI.
+
+You can always choose "uncompressed", but files will be large.
+Try to find a compatible codec; install other programs when needed.
+
+Internally, SpyroTAS uses 24bit images when game window
+  width is divisible by 4 (otherwise 32bit), you can try to tweak that.
+
+Codec settings are NOT saved between sessions.
+
+
+$b_combine
+
+"Combine". Joins BMP or PNG images to one AVI video.
+Don't forget to set playback speed in the editbox above!
+
+You will be prompted to select a folder with pictures.
+Choose one any file from there, everything will be used.
+Also you should select a video codec for conversion.
+
+AVI file would be stored to parent directory
+  (\SpyroTAS\*.avi) with name of target folder.
+Progress will be displayed in window caption, but GUI freezes.
+
+If you want to delete some wrong frames from your sequence -
+  go to that folder in Explorer and clean it before combining.
+
+Also you may use this feature to any sequence of similar images,
+  not just for created by SpyroTAS.
+
+
+$se_avi
+
+Target video playback speed in frames per second.
+
+Used during screenshoting to video and when combining.
+
+Naturally, should be equal to game FPS,
+  or a half of it (especially when "Diff" is checked).
+
+
+$se_png
+
+Png zlib compression rate.
+Only for screenshoting to PNG.
+
+Here 0 means no compression; and 9 - best, but very slow.
+Use 2-4 to get good speed, 6-8 to use less disk space.
+
+
+$c_diff
+
+"Diff". Do not save screenshot if nothing new was drawn.
+This mode is saved between sessions.
+
+Internally, this is not a test of similarity of images,
+  instead it just tracks is the emulator sent new draw commands.
+
+May not work for every game. When in effect,
+  you will have gaps in numbers of image file sequence.
+Significantly speeds up screenshot capture!
+
+WARNING: when you need to combine your video with some
+  recorded audio from the game - better uncheck this feature.
+
+
+$c_ever
+
+"Ever". Make screenshots in "Free" mode too.
+This mode is saved between sessions.
+
+By default, SpyroTAS will screenshot only if playing
+  or recording is in effect, even when "Shots" is checked.
+
+Note that capture is made by Windows GDI, and will also
+  cover anything that is above the game window.
+
+In "Ever" mode images are never will be overridden
+  and have sequenced number filename, not frame-based.
+
+
+$b_see
+
+"[See]". Opens screenshot preview window.
+
+Normally you don't need it, but it may be useful
+  when you want to be sure that capture is working.
+
+This will output captured frames to a separate windows.
+
+Quality of preview is really bad, but it is OK.
+Also this has some impact on performance.
+
+
+$b_over
+
+"[Over]". Opens pad overlay windows.
+
+There will be showed all your pressed buttons.
+You can even put it above the game to capture with overlay!
+Transparency is adjusted with the slider below.
+
+Resize overlays as you want (bigger might have performance impact).
+Left click inside - toggle frame border visibility.
+Right click: if only one overlay is visible - restore aspect ratio;
+  if both are visible - make current size to match the other.
+
+NOTE: to open overlays without having to open this window,
+  try to click "[Keys]" (and "[Capt]") with right mouse button!
+
+Click [Over] with right mouse button to display counter overlays.
+One will show current frame number, and another - "re-records" for
+  current frame. This is a number of rewriting a frame with new keys,
+  also it is stored inside a history, per each frame.
+
+Counter overlays are similar to pad, but right-clicking it with visible
+  borders will change text alignment, and without border - cycle styles.
+
+In Sprint mode meanings of counter overlay is different:
+Instead of re-records there will be shown your current FPS multiplied by 1000.
+In free-mode, the negative number is an average FPS for all movie;
+  frame counter will show a standard deviation from that value.
+
+
+$b_select
+
+"Select". Selects all contents of the text field.
+Also sets input focus to the text.
+
+You can copy, edit, replace and merge your history
+  in any external text editor; then paste it back.
+
+
+$b_reload
+
+"Reload". Reloads text field from current active history.
+It's also performed when this window opens.
+
+Every line is a frame. Character "|" (vertical line) is a separator.
+Each frame is represented as follows:
+| <HASH> | <RE-REC> | <PAD 1> | <PAD 2> | <TIMEPOINT>| [KEYSTATE]
+Where:
+<HASH> is a CRC for game RAM in that frame, example "769C6C0A"
+<RE-REC> is a number of re-records of the frame.
+<PAD x> is 16 buttons pressing state: "321 UDLR ES TXQC 123"
+<TIMEPOINT> is a frame number.
+[KEYSTATE] is present when that frame has a keystate.
+
+When a key on the pad is not pressed, it prints "-" instead.
+Letter meanings: 321 = L3, L2, L1;
+UDLR = Up, Down, Left, Right;
+ES = sElect, Start;
+TXQC = Triangle, cross (X), sQuare, Circle;
+123 = R1, R2, R3.
+
+Keystate number is the same as in files "\SpyroTAS\hist\tmp_*.tmp"
+
+
+$b_accept
+
+"Accept". Parses text in the field and check for valid format.
+If successful, current history and keystates list will be updated.
+This will not affect actual savestates on disk,
+  but new history will be saved to disk immediately!
+
+Text format for import is the same as for export, but simpler:
+- spaces and empty lines are completely ignored;
+- for pad buttons, only "-" and non-"-" are distinguished
+    (position is only important; but overall length must be 16).
+- frame counter is ignored (but must present anyway, at least "0"),
+    because frames are enumerated automatically again.
+- keystate number is also ignored; any character will do the work.
+
+When parsing error occurred, you will get a window
+  with 3 strings: previous, erroneous and the next.
+History will not be updated until there no errors.
+
+
+$eof
