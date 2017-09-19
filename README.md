@@ -1,10 +1,10 @@
-# [Kly_Men_COmpany](https://github.com/aleksusklim/Kly_Men_COmpany)/[Spyro](https://github.com/aleksusklim/category-spyro)/[SpyroTAS](https://github.com/aleksusklim/project-SpyroTAS)
+# [Kly_Men_COmpany][]/[Spyro][]/[SpyroTAS][]/
 
-The project is stored inside [/plugins/]( https://github.com/aleksusklim/project-SpyroTAS/tree/master/plugins/) directory.
+The project is stored inside [/plugins/]( https://github.com/aleksusklim/SpyroTAS/tree/master/plugins/) directory.
 
-Note that I am not the author of any code inside [/plugins/pngzlib]( https://github.com/aleksusklim/project-SpyroTAS/tree/master/plugins/pngzlib/) subfolder, and that code have different (but open source) licenses.
+Note that I am not the author of any code inside [/plugins/pngzlib]( https://github.com/aleksusklim/SpyroTAS/tree/master/plugins/pngzlib/) subfolder, and that code have different (but open source) licenses.
 
-Also see my included [LICENSE.txt]( https://github.com/aleksusklim/project-SpyroTAS/blob/master/plugins/LICENSE.txt).
+Also see my included [LICENSE.txt]( https://github.com/aleksusklim/SpyroTAS/blob/master/plugins/LICENSE.txt).
 
 ## Download:
 
@@ -34,3 +34,11 @@ Also see my included [LICENSE.txt]( https://github.com/aleksusklim/project-Spyro
 - [v1.2](http://klimaleksus.narod.ru/Files/T/SpyroTAS1V2_wip.rar) _(613 Kb)_
 - [v1.1](http://klimaleksus.narod.ru/Files/T/SpyroTAS_wip_.rar) _(470 Kb)_
 - [v0.1](http://klimaleksus.narod.ru/Files/4/SpyroTAS0V1.rar) _(158 Kb)_
+
+---
+
+_[Back][Spyro]_
+
+[Kly_Men_COmpany]: https://github.com/aleksusklim/Kly_Men_COmpany "Kly_Men_COmpany"
+[Spyro]: https://github.com/aleksusklim/Kly_Men_COmpany/tree/master/Spyro/ "Kly_Men_COmpany/Spyro/"
+[SpyroTAS]: https://github.com/aleksusklim/SpyroTAS/ "Kly_Men_COmpany/Spyro/SpyroTAS/"
