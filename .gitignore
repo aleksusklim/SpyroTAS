@@ -1,8 +1,1 @@
 *.tmp
-*.dll
-*.exe
-*.~*
-*.7z
-plugins/lib
-plugins/backup
-plugins/pngzlib/backup

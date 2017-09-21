@@ -1,18 +1,16 @@
 # [Kly_Men_COmpany][]/[Spyro][]/[SpyroTAS][]/
 
-The project is stored inside [/plugins/]( https://github.com/aleksusklim/SpyroTAS/tree/master/plugins/) directory.
+The project is stored in [project/SpyroTAS.dpr](./project/SpyroTAS.dpr).
 
-Note that I am not the author of any code inside [/plugins/pngzlib]( https://github.com/aleksusklim/SpyroTAS/tree/master/plugins/pngzlib/) subfolder, and that code have different (but open source) licenses.
+Note that I am not the author of any code inside [/project/pngzlib](./project/pngzlib/) subfolder, and that code have different (but open source) licenses.
 
-Also see my included [LICENSE.txt]( https://github.com/aleksusklim/SpyroTAS/blob/master/plugins/LICENSE.txt).
+Also see my included [LICENSE.txt](./project/LICENSE.txt).
 
 ## Download:
 
-- _(no stable release currently)_
+- _(no stable version currently)_
 
-## Releases:
-
-(All archives contain source code too)
+## Old releases:
 
 - [v2.5](http://klimaleksus.narod.ru/Files/4/SpyroTAS2V5.rar) _(2.32 Mb)_
 - [v2.4](http://klimaleksus.narod.ru/Files/4/SpyroTAS2V4.rar) _(1.86 Mb)_
