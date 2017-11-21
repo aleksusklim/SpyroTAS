@@ -335,8 +335,8 @@ begin
     StartFromRecord := True;
     IsFreeMode := False;
   end
-  else if IniValueUpdate(PathToIni, SectionSpyrotas, 'tas_freeze') = '1' then
-    AlwaysAutoinvoke := True;
+  else
+    AlwaysAutoinvoke := IniValueUpdate(PathToIni, SectionSpyrotas, 'tas_freeze') = '1';
   if MoveLimitMb < 4 then
     MoveLimitMb := 4
   else if MoveLimitMb > 256 then

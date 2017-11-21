@@ -111,8 +111,6 @@ begin
       Fbind.grd_hot.Cells[1, Index + 1] := VkKeyNames[Key];
   end;
 
-  Fbind.c_autofreeze.Checked := AlwaysAutoinvoke;
-
   InternalChange := False;
 end;
 
@@ -215,6 +213,8 @@ begin
     Cells[0, 2] := ' Do loadstate';
   end;
   c_pad_routed.Checked := IsPadRouted;
+  AlwaysAutoinvoke := IniValueUpdate(PathToIni, SectionSpyrotas, 'tas_freeze') = '1';
+  c_autofreeze.Checked := AlwaysAutoinvoke;
 end;
 
 // timer for key polling

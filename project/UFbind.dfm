@@ -136,7 +136,7 @@ object Fbind: TFbind
       end
       object c_autofreeze: TCheckBox
         Left = 4
-        Top = 216
+        Top = 224
         Width = 257
         Height = 17
         Caption = 'Auto-Invoke and freeze SpyorTAS right afret start'
