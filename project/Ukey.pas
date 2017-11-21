@@ -54,8 +54,9 @@ const // hotkey sequence
   HotkeyFrame = 6;
   HotkeyExit = 7;
   HotkeyWarp = 8;
-  EmulatorHotkeySavestate = 9;
-  EmulatorHotkeyLoadstate = 10;
+  HotkeyAuto = 9;
+  EmulatorHotkeySavestate = 10;
+  EmulatorHotkeyLoadstate = 11;
   HotkeysLast = EmulatorHotkeyLoadstate; // must point to previous!
 
 type
@@ -64,17 +65,18 @@ type
 const // for ini
   HotkeyNames: array[0..HotkeysLast] of string = ('hot_save', 'hot_load',
     'hot_prev', 'hot_last', 'hot_swap', 'hot_fast', 'hot_advance', 'hot_exit',
-    'hot_warp', 'emu_save', 'emu_load');
+    'hot_warp', 'hot_auto', 'emu_save', 'emu_load');
 
 const
   HotkeyExitDefault = VK_F10; // explicit
   DefaultHotkeys: array[0..HotkeysLast] of Byte = (VK_APPS, VK_RETURN, VK_BACK,
-    VK_DIVIDE, VK_TAB, VK_ADD, VK_SUBTRACT, HotkeyExitDefault, VK_MULTIPLY, VK_F1, VK_F3);
+    VK_DIVIDE, VK_TAB, VK_ADD, VK_SUBTRACT, HotkeyExitDefault, VK_MULTIPLY,
+    VK_DECIMAL, VK_F1, VK_F3);
 
 const // keycode names
   VkKeyNames: array[0..255] of string = ('', 'Left Mouse', 'Right Mouse',
     '[CANCEL]', 'Middle Mouse', 'X-1 Mouse', 'X-2 Mouse', '(7)', 'Backspasce',
-    'Tab', '(10)', '(11)', 'Clear (num 5)', 'Enter', '(14)', '(15)', '(16)',
+    'Tab', '(10)', '(11)', 'Clear (Num 5)', 'Enter', '(14)', '(15)', '(16)',
     '(17)', '(18)', 'Pause Break', 'Caps Lock', '[KANA]', '(22)', '[JUNJA]',
     '[FINAL]', '[KANJI]', '(26)', '', '[CONVERT]', '[NONCONVERT]', '[ACCEPT]',
     '[MODECHANGE]', 'Space', 'Page Up', 'Page Down', 'End', 'Home', 'Left', 'Up',

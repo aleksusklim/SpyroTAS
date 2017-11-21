@@ -1,6 +1,6 @@
 
 #define SpyroTAS_MAJOR 2
-#define SpyroTAS_MINOR 5
+#define SpyroTAS_MINOR 6
 
 
 #define VOS_NT_WINDOWS32	(0x40004L)

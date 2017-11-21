@@ -109,7 +109,7 @@ const
   PngIsAvailable = True;
 {$ENDIF}
 
-implementation
+implementation                      
 
 uses
   DateUtils, StrUtils, Uglob

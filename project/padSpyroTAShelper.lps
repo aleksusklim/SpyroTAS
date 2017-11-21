@@ -24,7 +24,7 @@
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit1>
       <Unit2>
-        <Filename Value="D:\LAZ\fpc\3.0.0\source\rtl\win\wininc\struct.inc"/>
+        <Filename Value="G:\LAZ\fpc\3.0.0\source\rtl\win\wininc\struct.inc"/>
         <EditorIndex Value="2"/>
         <TopLine Value="8346"/>
         <CursorPos X="27" Y="8351"/>
@@ -45,7 +45,7 @@
         <Caret Line="26" Column="29" TopLine="13"/>
       </Position3>
       <Position4>
-        <Filename Value="D:\LAZ\fpc\3.0.0\source\rtl\win\wininc\struct.inc"/>
+        <Filename Value="G:\LAZ\fpc\3.0.0\source\rtl\win\wininc\struct.inc"/>
         <Caret Line="8051" Column="40" TopLine="8038"/>
       </Position4>
       <Position5>

@@ -2,7 +2,7 @@
 
 The project is stored in [project/SpyroTAS.dpr](./project/SpyroTAS.dpr).
 
-Note that I am not the author of any code inside [/project/pngzlib](./project/pngzlib/) subfolder, and that code have different (but open source) licenses.
+Note that I am not the author of any code inside [/project/others](./project/others/) subfolder, and that code have different (but open source) licenses.
 
 Also see my included [LICENSE.txt](./project/LICENSE.txt).
 
@@ -12,6 +12,7 @@ Also see my included [LICENSE.txt](./project/LICENSE.txt).
 
 ## Old releases:
 
+- [v2.6](http://klimaleksus.narod.ru/Files/4/SpyroTAS2V6.rar) _(2.29 Mb)_
 - [v2.5](http://klimaleksus.narod.ru/Files/4/SpyroTAS2V5.rar) _(2.32 Mb)_
 - [v2.4](http://klimaleksus.narod.ru/Files/4/SpyroTAS2V4.rar) _(1.86 Mb)_
 - [v2.3](http://klimaleksus.narod.ru/Files/4/SpyroTAS2V3.rar) _(1.73 Mb)_

@@ -23,9 +23,9 @@
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <MajorVersionNr Value="2"/>
-      <MinorVersionNr Value="5"/>
+      <MinorVersionNr Value="6"/>
       <CharSet Value="04E3"/>
-      <StringTable Comments="It may be possible to extract the source code (if present), try unpack this file with 7zip..." CompanyName="Kly_Men_COmpany" FileDescription="SpyroTAS v2.5!" LegalCopyright="Licensed under WTFPL" OriginalFilename="SpyroTAS.dll" ProductVersion=""/>
+      <StringTable Comments="It may be possible to extract the source code (if present), try unpack this file with 7zip..." CompanyName="Kly_Men_COmpany" FileDescription="SpyroTAS v2.6!" LegalCopyright="Licensed under WTFPL" OriginalFilename="SpyroTAS.dll" ProductVersion=""/>
     </VersionInfo>
     <BuildModes Count="1">
       <Item1 Name="Default" Default="True"/>
@@ -63,7 +63,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="pngzlib"/>
+      <OtherUnitFiles Value="others"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Parsing>

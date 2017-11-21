@@ -526,18 +526,26 @@ begin
   PutHints1(); // hints for initial screen
   if StartFromRecord then
   begin
-    Caption := '  ' + SpyroTASName + '...';
+    Caption := '  ' + SpyroTASName + '... (boot record)';
     b_invoke.Caption := 'Autoinvoke ' + SpyroTASName + SpyroTASVestionString;
     SetWindowLong(Handle, GWL_STYLE, GetWindowLong(Handle, GWL_STYLE) and not
       WS_SYSMENU); // remove close button
   end
   else
   begin
-    if IsRunDLL then
-      Caption := '  ' + SpyroTASName + ' [rundll32]:'
+    if AlwaysAutoinvoke and not IsRunDLL then
+    begin
+      Caption := '  ' + SpyroTASName + '... (auto freeze)';
+      b_invoke.Caption := 'Autoinvoke ' + SpyroTASName + SpyroTASVestionString;
+    end
     else
-      Caption := '  ' + SpyroTASName + ':';
-    b_invoke.Caption := 'Invoke ' + SpyroTASName + SpyroTASVestionString;
+    begin
+      if IsRunDLL then
+        Caption := '  ' + SpyroTASName + ' [rundll32]:'
+      else
+        Caption := '  ' + SpyroTASName + ':';
+      b_invoke.Caption := 'Invoke ' + SpyroTASName + SpyroTASVestionString;
+    end;
   end;
   pnl_main.Visible := False; // no general gui
   pnl_init.Visible := True; // initial controls
@@ -574,6 +582,8 @@ begin
   if GuiClosing then
     Exit;
   MakeKeyUp(GetAssignedHotkey(EmulatorHotkeySavestate));
+  if Fbind = nil then
+    Fbind := TFbind.Create(nil);
   // create rest of forms
   Fshot := TFshot.Create(nil);
   Fext := TFext.Create(nil);
@@ -662,6 +672,7 @@ begin
   WaitForSavestate := False;
   ChooseSemiAuto(); // just in case
   SendAction(caGuiInit); // all ok
+  timer_mainTimer(nil); // force
   if StartFromRecord then
   begin // boot record mode
     if Length(KeystateList) = 0 then // start new history
@@ -671,9 +682,12 @@ begin
     StopOnBlur := True; // set manually
   end
   else
+  begin
     b_free.Click(); // normal run, start free mode
+    if AlwaysAutoinvoke and not IsRunDLL then
+      RequestSwitch(True);
+  end;
   StartFromRecord := False;
-  timer_mainTimer(nil); // force
   if IsRunDLL then
     AllFormsAction(afaFocus);
 end;
@@ -701,7 +715,6 @@ var
   TopMost: TFSpyroTAS; // will be Fhide or Fgui before invoking
   Time: Integer;
 begin
-//Caption:=TimeToString(Now());
   if GuiClosing then
     Exit;
   TopMost := nil;
@@ -735,10 +748,12 @@ begin
         ThresholdTimepoint := -1; // dirty fix
     end;
     c_2nd.Checked := UseSecond;
+    c_auto.Checked := UseAutofire;
     TopMost := Fhide; // always in normal mode
   end
   else if Sender <> nil then // prevent internal calls
   begin
+    SaveSettingsScheduled := False;
     if not ToldGuiCreated then
     begin
       SetEvent(EventGuiCreated);
@@ -749,7 +764,7 @@ begin
     if (RamStartRequest <> nil) and not WaitForSavestate then
     begin
       b_invoke.Font.Style := [fsBold, fsUnderline];
-      if StartFromRecord then
+      if StartFromRecord or AlwaysAutoinvoke then
       begin
         b_invoke.Enabled := True;
         b_invoke.Click(); // can be commented out to make a robus test
@@ -1048,6 +1063,7 @@ end;
 procedure TFgui.c_hashClick(Sender: TObject);
 begin
   UseHashing := c_hash.checked;
+  HashWait := 0;
   SaveSettingsScheduled := True;
   timer_mainTimer(nil);
 end;

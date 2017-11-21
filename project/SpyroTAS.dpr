@@ -10,7 +10,7 @@ uses
   Windows,   
   {(*}
   // units
-  {%H-}Uavi in 'Uavi.pas',
+  {%H-}Uavi in 'Uavi.pas',            
   {%H-}Uforms in 'Uforms.pas',
   {%H-}Uglob in 'Uglob.pas',
   {%H-}Ugpu in 'Ugpu.pas',

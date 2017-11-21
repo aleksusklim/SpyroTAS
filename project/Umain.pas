@@ -71,6 +71,7 @@ procedure SwitchToGui();
 begin
   ThisIsRestart := False;
   SwitchRequested := False;
+  HashWait := 0;
   SetColorStatus(StatusGui); // visual signal
   ResetEvent(EventContinueGame); // hold game
   // restore save-load and free modes
@@ -130,6 +131,7 @@ begin
     LoadRequsted := False;
     LoadWaitForDone := 0;
     LoadWaitAfter := 0;
+    HashWait := 0;
     SetColorStatus(StatusLoading);
     if SprintMode or (KeystateToLoad = -1) then
       SavedKeys := 0
@@ -159,6 +161,7 @@ begin
     end;
     if (HistoryPosition <> -1) and (HistoryPosition <> SprintValue) then
     begin
+      HashWait := 0;
       SendAction(caPopup);
       LoadWaitForDone := 0;
       IsFreeMode := LoadInFree;
@@ -242,6 +245,7 @@ begin
   begin
     if SavestateExist() then
     begin
+      HashWait := 0;
       LiveSaveRequest := False;
       StopOnBlur := True;
       for TargetKeystate := 0 to Length(KeystateList) - 1 do
@@ -286,6 +290,7 @@ begin
     CurrentKeys := SavedKeys;
     if SavestateExist() then
     begin
+      HashWait := 0;
       StopOnBlur := True;
       SaveWaitForDone := 0;
       TargetKeystate := Length(KeystateList);
@@ -329,7 +334,9 @@ begin
     IniValueUpdate(PathToIni, SectionSpyrotas, 'boot_play', '0');
     StartFromRecord := True;
     IsFreeMode := False;
-  end;
+  end
+  else if IniValueUpdate(PathToIni, SectionSpyrotas, 'tas_freeze') = '1' then
+    AlwaysAutoinvoke := True;
   if MoveLimitMb < 4 then
     MoveLimitMb := 4
   else if MoveLimitMb > 256 then
@@ -480,7 +487,7 @@ var
 const
   WaitDone: Integer = 7;
 begin
-  if GuiClosing or (not AllowWarp) or not IsGuiInvoked then
+  if GuiClosing or not AllowWarp or not IsGuiInvoked then
     Exit;
   Rec := False;
   OldHistory := HistoryPosition;
@@ -497,6 +504,7 @@ begin
     KeyWait := 0;
     Oldnew := HaveNewScreen;
     Stat := CurrentStatus;
+    HashWait := 0;
     SetColorStatus(StatusGpuMovie);
     GpuReplay(True);
     Yes := True;
@@ -515,7 +523,7 @@ begin
         Key := GetAssignedHotkey(HotkeyFrame);
         Key2 := GetAssignedHotkey(HotkeyWarp);
       end;
-      if WatchFlipRequested and (not Play) then
+      if WatchFlipRequested and not Play then
       begin
         Play := True;
         WatchFlipRequested := False;
@@ -600,6 +608,7 @@ begin
     if Rec then
       GpuRecord(True);
     HaveNewScreen := Oldnew;
+    HashWait := 0;
     SetColorStatus(Stat);
   except
     on E: Exception do
@@ -661,6 +670,7 @@ begin
       begin
         SetHistoryPosition(-1);
         IsFreeMode := True;
+        HashWait := 0;
         SetColorStatus(StatusFree);
       end
       else
@@ -725,6 +735,8 @@ movie:
         FrameAdvanceHold := 0;
       if IsHotkeyPressed(HotkeySwap, True) then
         UseSecond := not UseSecond;
+      if IsHotkeyPressed(HotkeyAuto, True) then
+        UseAutofire := not UseAutofire;
 
       if (IsHotkeyPressed(HotkeyWarp, True) or WarpRequested) and not SprintMode then
       begin
@@ -852,7 +864,7 @@ movie:
     end;
 
     if UseHashing and (PointerToRamStart <> nil) then // ram CRC needed
-      CurrentHash := HashRAM();
+      CurrentHash := HashRAM(HistoryPosition);
 
     if (History.GetSize() <= HistoryPosition) then  // less by one
     begin
@@ -944,11 +956,11 @@ movie:
       begin
         if LastTimepoint = 0 then
         begin
-          SprintHashBegin := HashRAM();
+          SprintHashBegin := HashRAM(-1);
         end
         else
         begin
-          if HashRAM() <> SprintHashBegin then
+          if HashRAM(-1) <> SprintHashBegin then
             SetColorStatus(StatusHashMiss);
         end;
       end;
@@ -956,14 +968,14 @@ movie:
     else
     begin
       if HistoryPosition = LastTimepoint - 10 then
-        if HashRAM() <> SprintHashEnd then
+        if HashRAM(-1) <> SprintHashEnd then
           SprintMiss := True;
     end;
     if SprintSave > 0 then
     begin
       CurrentKeys := SavedKeys;
       if SprintSave = 20 then
-        SprintHashEnd := HashRAM();
+        SprintHashEnd := HashRAM(-1);
       if SprintSave = 30 then
       begin
         SprintSave := 0;
@@ -988,8 +1000,11 @@ movie:
 
   if (HistoryPosition < LastTimepoint) and (not IsFreeMode) and not SemiHashFix then
   begin
-    if CurrentHash <> OldHash then  // if hashing is used
+    if CurrentHash <> OldHash then
+      HashWait := 33;
+    if HashWait > 0 then  // if hashing is used
     begin
+      Dec(HashWait);
       if CurrentStatus <> StatusHashMiss then  // wrong hash
         SetColorStatus(StatusHashMiss);
     end
@@ -1074,6 +1089,8 @@ movie:
 
   if IsHotkeyPressed(HotkeySwap, True) then // swap controllers hotkeys
     UseSecond := not UseSecond;
+  if IsHotkeyPressed(HotkeyAuto, True) then
+    UseAutofire := not UseAutofire;
 
   Counter := HistoryPosition;
   if SprintMode then

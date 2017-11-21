@@ -49,7 +49,7 @@
 @echo ========= Deleting old binaries: =========
 @echo.
 
-del *.7z *.dll *.exe *.dcu *.~* pngzlib\*.dcu pngzlib\*.~* *.ddp *.lrs *.jar *.o *.a *.obj *.tds
+del *.7z *.dll *.exe *.dcu *.~* others\*.dcu others\*.~* *.ddp *.lrs *.jar *.o *.a *.obj *.tds
 if exist .\lib\ rmdir /s /q .\lib\
 mkdir .\lib\
 
@@ -57,7 +57,7 @@ mkdir .\lib\
 @echo ========= 7-Zipping source code: =========
 @echo.
 
-%PATH_7Z% a SpyroTAS.7z *.lpr *.lpi *.dpr *.cfg *.dof *.lps *.pas *.dfm *.rc *.bat *.txt *.c *.ini pngzlib\*.pas pngzlib\*.inc included\*
+%PATH_7Z% a SpyroTAS.7z *.lpr *.lpi *.dpr *.cfg *.dof *.lps *.pas *.dfm *.rc *.bat *.txt *.c *.ini others\*.pas others\*.inc included\*
 
 @echo.
 @echo ========= Compiling with Lazarus: =========
@@ -79,7 +79,7 @@ if exist SpyroTAS.dll rename SpyroTAS.dll SpyroTAS_Laz.dll
 %PATH_DCC% LCL_DFM_clean.dpr
 @if exist LCL_DFM_clean.exe @for %%i in (*.dfm) do @LCL_DFM_clean.exe %%i
 %PATH_BRC% -r SpyroTAS.rc
-%PATH_DCC% -U.\pngzlib\ -O.\lib\ SpyroTAS.dpr
+%PATH_DCC% -U.\others\ -O.\lib\ SpyroTAS.dpr
 
 @echo.
 @echo ========= Compressing with UPX: =========
@@ -108,7 +108,7 @@ if exist SpyroTAS_Laz.dll del SpyroTAS_Laz.dll
 @echo Deleting binary stuff (except executables):
 @echo.
 
-del *.dcu pngzlib\*.dcu *.ddp *.o *.a *.obj *.tds
+del *.dcu others\*.dcu *.ddp *.o *.a *.obj *.tds
 if exist .\lib\ rmdir /s /q .\lib\
 mkdir .\lib\
 

@@ -189,6 +189,7 @@ begin
     SetPermanentGridHint(grd_hot, 0, 7, GetText('grd_hot_0_7'));
     SetPermanentGridHint(grd_hot, 0, 8, GetText('grd_hot_0_8'));
     SetPermanentGridHint(grd_hot, 0, 9, GetText('grd_hot_0_9'));
+    SetPermanentGridHint(grd_hot, 0, 10, GetText('grd_hot_0_10'));
     SetPermanentGridHint(grd_pad, 0, 0, GetText('grd_pad_0_0'));
     SetPermanentGridHint(grd_pad, 1, 0, GetText('grd_pad_1_0'));
     SetPermanentGridHint(grd_pad, 2, 0, GetText('grd_pad_2_0'));
@@ -198,6 +199,7 @@ begin
     SetPermanentGridHint(grd_emu, 0, 1, GetText('grd_emu_0_1'));
     SetPermanentGridHint(grd_emu, 0, 2, GetText('grd_emu_0_2'));
     SetPermanentHint(c_pad_routed, GetText('c_pad_routed'));
+    SetPermanentHint(c_autofreeze, GetText('c_autofreeze'));
     m_help.Text := StringReplace(GetText('m_help'), #13, #13#10, [rfReplaceAll]);
   end;
 end;

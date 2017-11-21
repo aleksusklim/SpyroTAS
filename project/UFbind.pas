@@ -20,6 +20,7 @@ type
     m_help: TMemo;
     grd_emu: TStringGrid;
     c_pad_routed: TCheckBox;
+    c_autofreeze: TCheckBox;
     procedure FormCreate(Sender: TObject);
     procedure grd_anyGetEditText(Sender: TObject; ACol, ARow: Integer; var Value: string);
     procedure timer_keyTimer(Sender: TObject);
@@ -29,6 +30,7 @@ type
     procedure grd_anyContextPopup(Sender: TObject; MousePos: TPoint; var Handled:
       Boolean);
     procedure c_pad_routedClick(Sender: TObject);
+    procedure c_autofreezeClick(Sender: TObject);
   end;
 
 var
@@ -109,6 +111,8 @@ begin
       Fbind.grd_hot.Cells[1, Index + 1] := VkKeyNames[Key];
   end;
 
+  Fbind.c_autofreeze.Checked := AlwaysAutoinvoke;
+
   InternalChange := False;
 end;
 
@@ -184,7 +188,7 @@ begin
   end;
   with grd_hot do // second tab
   begin
-    RowCount := 10;
+    RowCount := 11;
     ColCount := 2;
     Height := RowCount * (DefaultRowHeight + 1) + 4;
     Cells[0, 0] := '      [For SpyroTAS]';
@@ -198,6 +202,7 @@ begin
     Cells[0, 7] := ' Frame advance, toggle';
     Cells[0, 8] := ' Toggle GUI (exit on hold)';
     Cells[0, 9] := ' Warp back via GPU';
+    Cells[0, 10] := ' Toggle Auto-key';
   end;
   with grd_emu do
   begin
@@ -300,6 +305,12 @@ end;
 procedure TFbind.c_pad_routedClick(Sender: TObject);
 begin
   c_pad_routed.Checked := IsPadRouted;
+end;
+
+procedure TFbind.c_autofreezeClick(Sender: TObject);
+begin
+  AlwaysAutoinvoke := c_autofreeze.Checked;
+  IniValueUpdate(PathToIni, SectionSpyrotas, 'tas_freeze', IntToStr(Ord(AlwaysAutoinvoke)));
 end;
 
 end.

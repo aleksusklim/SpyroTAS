@@ -12,8 +12,8 @@ const
   // customization for other developers / builds:
   SpyroTASGlobalName = 'SpyroTAS'; // change here in soruce, but read only by SpyroTASName
   SpyroTASVersionMajor: Integer = 2; // don't forget to change these
-  SpyroTASVersionMinor: Integer = 5; // version constants in .RC also!
-  SpyroTASVestionString: string = ' v2.5!'; // for strings, according to above
+  SpyroTASVersionMinor: Integer = 6; // version constants in .RC also!
+  SpyroTASVestionString: string = ' v2.6!'; // for strings, according to above
   SpyroTASDirectory: string = '.\SpyroTAS\'; // rename here to resolve path collisions
   // other constans:
   {$IFDEF FPC} // name only for strings and messages:
@@ -129,6 +129,8 @@ var
   SprintCalcD: Integer = 0;
   ThisIsRestart: Boolean = False;
   FireDeadlock: Integer = 0;
+  AlwaysAutoinvoke: Boolean = False;
+  HashWait: Integer = 0;
 
 var // for coordinate measurment
   SpyroX1, SpyroY1, SpyroZ1, SpyroX2, SpyroY2, SpyroZ2, SpyroTime2: Integer;
@@ -170,7 +172,7 @@ function EnsureAbsolutePath(const AnyPath: string): string;
 
 procedure EnterSptintMode(Start: Boolean);
 
-function HashRAM(): Integer;
+function HashRAM(Frame: Integer): Integer;
 
 procedure SprintFileSave();
 
@@ -562,6 +564,7 @@ end;
 
 procedure ResetLoadSave();
 begin
+  HashWait := 0;
   SaveWaitForNone := 0;
   SaveWaitForDone := 0;
   SaveWaitAfter := 0;
@@ -667,7 +670,7 @@ begin
   Ini := TTasIni.Create();
   Ini.Put('gui_type', Scr);
   Ini.Put('gui_fire', UseAutofire);
-  Ini.Put('gui_2nd', UseSecond);
+  Ini.Put('gui_2nd', UseSecond);    
   Ini.Put('gui_hash', UseHashing);
   Ini.Put('gui_png', PngCompression);
   Ini.Put('gui_avi', AviFrameRate);
@@ -872,10 +875,12 @@ begin
     FreeMem(Data);
 end;
 
-function HashRAM(): Integer;
+function HashRAM(Frame: Integer): Integer;
 var
   Cur: Integer;
   Off: PInteger;
+const
+  Bits = 5;
 begin
   Result := 0;
   if IsRunDLL or (PointerToRamStart = nil) then
@@ -883,7 +888,13 @@ begin
   Off := PInteger(PointerToRamStart + HistoryOffsetInRAM);
   Cur := Off^;
   Off^ := 0;
-  Result := HashCRC(PointerToRamStart, SizeOfRAM);
+  if Frame = -1 then
+    Result := HashCRC(PointerToRamStart, SizeOfRAM)
+  else
+  begin
+    Result := HashCRC(PointerToRamStart + (Frame and ((1 shl Bits) - 1)) * (SizeOfRAM
+      shr Bits), SizeOfRAM shr Bits);
+  end;
   Off^ := Cur;
 end;
 

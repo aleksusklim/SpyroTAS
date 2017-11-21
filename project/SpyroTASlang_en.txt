@@ -45,9 +45,9 @@ Spyro Tool-Assisted Speedrun plugin by Kly_Men_COmpany!
 
 == hotkeys ==
 
-- some frequent and useful plugin functions are available by hotkeys.
+- some frequent and useful plugin functions are available via hotkeys.
 - you can read their meanings with context helps in keybindings window.
-- default are: Save=APPLICATION ("menu"-key near to right Ctrl), Load=ENTER, Previous=BACKSPACE, Timepoint=NUM_DIVIDE, Swap=TAB, No limit=NUM_ADD, Advance=NUM_SUBSTRACT, Exit=F10, Warp=NUM_MULTIPLY.
+- defaults are: Save=APPLICATION ("menu"-key near to right Ctrl), Load=ENTER, Previous=BACKSPACE, Timepoint=NUM_DIVIDE, Swap=TAB, No limit=NUM_ADD, Advance=NUM_SUBSTRACT, Exit=F10, Warp=NUM_MULTIPLY, Auto=NUM_DOT.
 - Hotkey "Exit" (F10) is one that cannot be completely unset. Hold it to terminate the emulator when plugin is hung.
 
 == run ==
@@ -133,7 +133,7 @@ Spyro Tool-Assisted Speedrun plugin by Kly_Men_COmpany!
 - check "Hash" before recording a history.
 - now playing history will check CRC of game memory.
 - if something went wrong, you will see status change.
-- when you got rapid flashing, it still may mean that it's OK.
+- when it was restored soon, it still may mean that it's OK.
 - but a permanent mismatch means that you probably have to re-record that.
 - also you can recalculate hash for a part of history. Check "Semi" (but make sure that all semi-key button checkboxes are off, in "[Ext]"), set threshold to "1" - and now any played frame will recalculate its hash. Uncheck when done.
 
@@ -571,6 +571,13 @@ To opposite actions (frame forward, play forward)
 In Sprint mode: no action.
 
 
+$grd_hot_0_10
+
+Shortcut to "Auto" checkbox.
+
+Toggle autokey feature.
+
+
 $grd_pad_0_0
 
 These keys are referring to PlayStation's
@@ -669,6 +676,14 @@ To activate routing, you must select "SpyroTAS helper" as your input plugin
   (it should be saved as .dll file automatically next to current SpyroTAS.dll)
 
 When PAD routing helper is active, the "Emulator port" bindings are not used!
+
+
+$c_autofreeze
+
+Enable this and SpyroTAS will be automatically invoked right after
+  game initialization (just like when recording from boot).
+
+Also it'll be frozen (white status) and will wait your actions.
 
 
 $fhide

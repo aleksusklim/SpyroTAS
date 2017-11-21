@@ -24,7 +24,7 @@ object Fbind: TFbind
     Top = 5
     Width = 535
     Height = 357
-    ActivePage = tab_help
+    ActivePage = tab_func
     TabOrder = 0
     TabStop = False
     object tab_pad: TTabSheet
@@ -133,6 +133,15 @@ object Fbind: TFbind
         Caption = 'PAD plugin is used instead of Windows messages'
         TabOrder = 2
         OnClick = c_pad_routedClick
+      end
+      object c_autofreeze: TCheckBox
+        Left = 4
+        Top = 216
+        Width = 257
+        Height = 17
+        Caption = 'Auto-Invoke and freeze SpyorTAS right afret start'
+        TabOrder = 3
+        OnClick = c_autofreezeClick
       end
     end
     object tab_help: TTabSheet
