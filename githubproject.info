@@ -1,6 +1,6 @@
 ﻿The project is stored in [project/SpyroTAS.dpr](./project/SpyroTAS.dpr).
 
-Note that I am not the author of any code inside [/project/pngzlib](./project/pngzlib/) subfolder, and that code have different (but open source) licenses.
+Note that I am not the author of any code inside [/project/others](./project/others/) subfolder, and that code have different (but open source) licenses.
 
 Also see my included [LICENSE.txt](./project/LICENSE.txt).
 
